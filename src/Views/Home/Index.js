@@ -8,7 +8,7 @@ function Home() {
   const [data, setData] = useState([])
 
   async function Get() {
-    var jwtToken = localStorage.getItem('APPLICSTION_SIGN_TOKEN_AUTHENTICATION_JWT')
+    var jwtToken = localStorage.getItem('APPLICSTION_AUTHENTICATION')
     await axios.get('http://localhost:5000/v1/api',
     {
       'headers':
