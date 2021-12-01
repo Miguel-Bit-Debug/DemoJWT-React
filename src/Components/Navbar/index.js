@@ -23,7 +23,7 @@ export default function Navbar() {
 
                 {
                     useSelector(state => state.isAdmin) == true ?
-                    <li className="nav-item"><Link to="/Logout" className="nav-link font-weight-bold text-danger h5" onClick={() => dispatch({type: 'LOG_OUT'})}>adicionar produtos</Link></li>
+                    <li className="nav-item"><Link to="/new-products" className="nav-link font-weight-bold text-danger h5">adicionar produtos</Link></li>
                     :
                     <>
                     </>

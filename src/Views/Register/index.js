@@ -26,9 +26,8 @@ export default function Register() {
       async function register() {
         await axios.post('http://localhost:5000/v1/auth/register', user)
         .then(res => {
-            localStorage.setItem('APPLICSTION_SIGN_TOKEN_AUTHENTICATION_JWT', res.data.token)
+            localStorage.setItem('APPLICATION_AUTHENTICATION', res.data.token)
             setUserAuthenticated(true)
-            console.log(res)
             dispatch({ type: 'LOG_IN', usuarioEmail: email })
         }).catch(err => {
             console.log(err)
@@ -40,14 +39,14 @@ export default function Register() {
             <Navbar />
             {useSelector(state => state.usuarioLogado) > 0 ? <Redirect to='/' /> : null}
 
-            <div className="container d-flex">
-        <div className="register">
+            <div className="d-flex justify-content-center">
+        <div className="">
 
           <input onChange={(e) => setAvatar(e.target.value)} type="text" className="form-control" placeholder="Avatar"/>
           <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" placeholder="Email"/>
           <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control" placeholder="Senha"/>
           <input onChange={(e) => setPasswordConfirmation(e.target.value)} type="password" className="form-control" placeholder="Confirmar Senha"/>
-          <button onClick={() => register()} className="btn btn-primary">Cadastrar</button>
+          <button onClick={() => register()} className="btn btn-primary form-control">Cadastrar</button>
         </div>
       </div>
             

@@ -5,7 +5,7 @@ export default function Logout() {
     return (
         <div>
             <Navbar />
-            {document.location.replace('/login')}
+            {document.location.replace('/')}
             {localStorage.clear()}
         </div>
     )

@@ -3,6 +3,7 @@ import Home from './Views/Home/Index'
 import Login from './Views/Login'
 import Logout from './Views/Logout'
 import Register from './Views/Register'
+import AddProducts from './Views/AddProducts'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { store, persistor } from '../src/store/'
@@ -21,6 +22,7 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/logout' component={Logout} />
           <Route path='/register' component={Register} />
+          <Route path='/new-products' component={AddProducts} />
         </Router>
       </PersistGate>
     </Provider>

@@ -12,7 +12,6 @@ function Login() {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [isAdmin, setIsAdmin] = useState()
-  const [avatar, setAvatar] = useState()
   const dispatch = useDispatch();
 
 
@@ -28,10 +27,8 @@ function Login() {
   async function accountinfo() {
     await axios.post("http://localhost:5000/v1/AccountInfo", payload)
       .then(res => {
-        setAvatar(res.data.avatar)
         var admin = res.data.isAdmin === true ? true : false
         setIsAdmin(admin)
-        console.log(isAdmin)
       }).catch(err => {
         console.log(err)
       })
@@ -42,7 +39,7 @@ function Login() {
   async function login() {
     await axios.post("http://localhost:5000/v1/auth/login", user)
     .then(res => {
-        localStorage.setItem('APPLICSTION_AUTHENTICATION', res.data.token)
+      localStorage.setItem('APPLICATION_AUTHENTICATION', res.data.token)
         setUserAuthenticated(true)
         dispatch({ type: 'LOG_IN', usuarioEmail: email, isAdmin: isAdmin })
       }).catch(err => {
