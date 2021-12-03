@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios"
 import Navbar from "../../Components/Navbar"
+import { Link } from "react-router-dom"
 
 export default function AddProducts() {
 
@@ -12,13 +13,18 @@ export default function AddProducts() {
     const product = {
         name: name,
         description: description,
-        price: price,
-        likes: likes
+        price: price
     }
 
+    var jwtToken = localStorage.getItem('APPLICATION_AUTHENTICATION')
+
     async function addProduct() {
-        await axios.post('http://localhost:5000/v1/add', product)
-            .then(res => {
+        await axios.post('http://localhost:5000/v1/add', product, {
+            'headers': {
+                'Authorization':
+                    `Bearer ${jwtToken}`
+            }
+        }).then(res => {
                 console.log(res.data)
             }).catch(err => {
 
@@ -45,7 +51,7 @@ export default function AddProducts() {
                                 </div>
                             </div>
                             <div className="col-md-7 col-bg-5 col-sm-5 mx-auto">
-                                <button onClick={() => addProduct()} className="d-flex btn btn-primary text-center mt-3 form-control justify-context-center">Adicionar</button>
+                                <Link to="/" onClick={() => addProduct()} className="d-flex btn btn-primary text-center mt-3 form-control justify-context-center">Adicionar</Link>
                             </div>
                         </div>
                         <div>

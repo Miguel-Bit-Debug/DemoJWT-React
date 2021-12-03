@@ -1,18 +1,18 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../Components/Navbar/'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
 function Home() {
 
   const [data, setData] = useState([])
-  const dispatch = useDispatch();
+
   const userLogIn = useSelector(state => state.usuarioLogado)
 
-  async function Get() {
-    await axios.get('http://localhost:5000/v1/api')
+  function Get() {
+    axios.get('http://localhost:5000/v1/api')
       .then((res) => {
         setData(res.data)
       }).catch(err => {
@@ -22,29 +22,37 @@ function Home() {
 
   useEffect(() => {
     Get()
-  }, [])
+  }, [data])
 
   return (
 
     <div className="App">
       <Navbar />
-      <div className="container">
-        <div className="d-flex my-3">
-        {data.map(product => (
-          <div className="container card">
-            <div key={product.id}>
-              <h4>Produto: {product.name}</h4>
-              <h5>R$: {product.price}</h5>
-              {
-                userLogIn > 0 ?
-                <button onClick="#" className="btn btn-success mb-3">Comprar</button>
-                :
-                <Link to='/login' className="btn btn-dark mb-3">Comprar</Link>
-              }
+      <div className="col-12">
+        <div className="row">
+
+      {data.map(product => (
+        <div key={product.id}>
+            <div className="">
+              <div className="col-12">
+
+                <div className="d-flex my-3">
+                  <div className="container card">
+                    <h4>Produto: {product.name}</h4>
+                    <h5>R$: {product.price}</h5>
+                    {
+                      userLogIn > 0 ?
+                      <Link to="#" className="btn btn-success mb-3">Comprar</Link>
+                      :
+                      <Link to='/login' className="btn btn-dark mb-3">Comprar</Link>
+                    }
+                  </div>
+                </div>
+                    </div>
+              </div>
             </div>
-          </div>
-        ))}
-        </div>
+      ))}
+      </div>
       </div>
     </div>
   );

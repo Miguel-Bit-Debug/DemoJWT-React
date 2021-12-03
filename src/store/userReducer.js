@@ -9,6 +9,7 @@ function usuarioReducer(state = INITIAL_STATE, action){
         case 'LOG_IN':
             return{...state, usuarioLogado:1, usuarioEmail: action.usuarioEmail, isAdmin: action.isAdmin }
         case 'LOG_OUT':
+            localStorage.clear()
             return {...state, usuarioLogado:0, usuarioEmail: null, isAdmin: false }
          default:
              return state

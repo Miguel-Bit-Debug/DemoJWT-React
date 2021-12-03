@@ -1,9 +1,8 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../Components/Navbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import CryptoJS from 'crypto-js';
 import './login.css'
 
 
@@ -24,8 +23,17 @@ function Login() {
     email: email
   }
 
-  async function accountinfo() {
-    await axios.post("http://localhost:5000/v1/AccountInfo", payload)
+  var jwtToken = localStorage.getItem('APPLICATION_AUTHENTICATION')
+
+  function accountinfo() {
+    axios.post("http://localhost:5000/v1/AccountInfo", payload,
+    {
+      'headers':
+      {
+        'Authorization':
+        `Bearer ${jwtToken}`
+      }
+      })
       .then(res => {
         var admin = res.data.isAdmin === true ? true : false
         setIsAdmin(admin)
@@ -45,11 +53,6 @@ function Login() {
       }).catch(err => {
         console.log(err)
       })
-  }
-
-  const Logout = () => {
-    setUserAuthenticated(false)
-    localStorage.clear()
   }
 
   return (
